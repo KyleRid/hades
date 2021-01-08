@@ -8,15 +8,18 @@
       <tr v-for="role in roles">
         RoleID: {{role.id}}
         RoleName: {{role.name}}
-        <button v-on:click="del(role.id)">Delete</button>
+        <button v-on:click="deleteRole(role.id)">Delete</button>
         <br>
       </tr>
   </template>
   <form>
     <div class="form-group">
-      <input type="title" ref="title" class="form-control" id="role-name" placeholder="Enter role" required>
+      <input type="title" ref="name" class="form-control" id="name" placeholder="Enter role name" required>
     </div>
-    <button type="submit" @click.prevent="create" class="btn btn-primary block">Create</button>
+    <div class="form-group">
+      <input type="title" ref="description" class="form-control" id="description" placeholder="Enter role description" required>
+    </div>
+    <button type="submit" @click.prevent="createRole" class="btn btn-primary block">Create</button>
   </form>
   </div>
 </template>
@@ -34,18 +37,18 @@ export default {
     };
   },
   methods: {
-    create() {
+    createRole() {
       const formData = new FormData();
-      formData.append("title", this.$refs.title.value);
-      formData.append("body", this.$refs.body.value);
-      formData.append("user_id", this.userId);
-      // formData.append("image", this.$refs.image.files[0]);
+      formData.append("name", this.$refs.name.value);
+      formData.append("description", this.$refs.description.value);
+
       axios
-        .post("/api/posts", formData)
+        .post("/api/roles", formData)
         .then(response => {
           this.successful = true;
           this.error = false;
           this.errors = [];
+          this.getDataFromApi();
         })
         .catch(error => {
           if (!_.isEmpty(error.response)) {
@@ -56,18 +59,17 @@ export default {
             }
           }
         });
-      this.$refs.title.value = "";
-      this.$refs.body.value = "";
+      this.$refs.name.value = "";
+      this.$refs.description.value = "";
     },
-    del(roleID) {
-      console.log('roleID', roleID);
-       axios.delete("/api/roles/" + roleID);
+    deleteRole(roleID) {
+       axios.delete("/api/roles/" + roleID).then(() => {
+         this.getDataFromApi();
+       });
     },
     async getDataFromApi() {
       this.loading = true;
       const response = await axios.get('/api/roles/');
-      console.log('response', response);
-
       this.loading = false;
       this.roles = response.data.data;
     }

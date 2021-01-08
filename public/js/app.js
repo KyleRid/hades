@@ -61775,6 +61775,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -61788,18 +61791,18 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   },
 
   methods: {
-    create: function create() {
+    createRole: function createRole() {
       var _this = this;
 
       var formData = new FormData();
-      formData.append("title", this.$refs.title.value);
-      formData.append("body", this.$refs.body.value);
-      formData.append("user_id", this.userId);
-      // formData.append("image", this.$refs.image.files[0]);
-      axios.post("/api/posts", formData).then(function (response) {
+      formData.append("name", this.$refs.name.value);
+      formData.append("description", this.$refs.description.value);
+
+      axios.post("/api/roles", formData).then(function (response) {
         _this.successful = true;
         _this.error = false;
         _this.errors = [];
+        _this.getDataFromApi();
       }).catch(function (error) {
         if (!_.isEmpty(error.response)) {
           if (error.response.status = 422) {
@@ -61809,12 +61812,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
           }
         }
       });
-      this.$refs.title.value = "";
-      this.$refs.body.value = "";
+      this.$refs.name.value = "";
+      this.$refs.description.value = "";
     },
-    del: function del(roleID) {
-      console.log('roleID', roleID);
-      axios.delete("/api/roles/" + roleID);
+    deleteRole: function deleteRole(roleID) {
+      var _this2 = this;
+
+      axios.delete("/api/roles/" + roleID).then(function () {
+        _this2.getDataFromApi();
+      });
     },
     getDataFromApi: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
@@ -61830,12 +61836,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               case 3:
                 response = _context.sent;
 
-                console.log('response', response);
-
                 this.loading = false;
                 this.roles = response.data.data;
 
-              case 7:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -62661,7 +62665,7 @@ var render = function() {
                 {
                   on: {
                     click: function($event) {
-                      _vm.del(role.id)
+                      _vm.deleteRole(role.id)
                     }
                   }
                 },
@@ -62675,12 +62679,25 @@ var render = function() {
       _c("form", [
         _c("div", { staticClass: "form-group" }, [
           _c("input", {
-            ref: "title",
+            ref: "name",
             staticClass: "form-control",
             attrs: {
               type: "title",
-              id: "role-name",
-              placeholder: "Enter role",
+              id: "name",
+              placeholder: "Enter role name",
+              required: ""
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            ref: "description",
+            staticClass: "form-control",
+            attrs: {
+              type: "title",
+              id: "description",
+              placeholder: "Enter role description",
               required: ""
             }
           })
@@ -62694,7 +62711,7 @@ var render = function() {
             on: {
               click: function($event) {
                 $event.preventDefault()
-                return _vm.create($event)
+                return _vm.createRole($event)
               }
             }
           },

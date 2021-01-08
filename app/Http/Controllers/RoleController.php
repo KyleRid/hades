@@ -38,30 +38,19 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'title' => 'required',
-        //     'body' => 'required',
-        //     'user_id' => 'required',
-        //     'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
-        // ]);
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+        ]);
 
-        // $post = new Post();
+        $role = new Role();
 
-        // if ($request->hasFile('image')) {
-        //     $image = $request->file('image');
-        //     $name = str_slug($request->title) . '.' . $image->getClientOriginalExtension();
-        //     $destinationPath = public_path('/uploads/posts');
-        //     $imagePath = $destinationPath . "/" . $name;
-        //     $image->move($destinationPath, $name);
-        //     $post->image = $name;
-        // }
+        $role->id = $request->id;
+        $role->name = $request->name;
+        $role->description = $request->description;
+        $role->save();
 
-        // $post->user_id = $request->user_id;
-        // $post->title = $request->title;
-        // $post->body = $request->body;
-        // $post->save();
-
-        // return new RoleResource($post);
+        return new RoleResource($role);
     }
 
     /**
@@ -115,9 +104,8 @@ class RoleController extends Controller
 
     public function destroy(Role $role)
     {
-        // $role->delete();
-        // return response()->json(null, 204);
-        return ['deleted123' => $role];
+        $role->delete();
+        return response()->json(null, 204);
     }
 
     public function all()
