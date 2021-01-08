@@ -9,6 +9,7 @@ import Read     from './components/Read'
 import Update   from './components/Update'
 import Comments from './components/Comments'
 import CreateRole from './components/Createrole'
+import UserControl from './components/UserControl'
 
 const router = new VueRouter({
     mode: 'history',
@@ -37,8 +38,15 @@ const router = new VueRouter({
             component: CreateRole,
             props: true
         },
+        {
+            path: '/admin/users/',
+            name: 'userControl',
+            component: UserControl,
+            props: true
+        },
     ],
 });
+
 const app = new Vue({
     el: '#app',
     components: { Homepage, Comments },

@@ -9,6 +9,7 @@
     <ul>
        <li> <router-link :to="{ name: 'create', params: { userId } }">New Post </router-link></li>
        <li> <router-link :to="{ name: 'createRole' }">New Role</router-link></li>
+       <li> <router-link :to="{ name: 'userControl' }">User Control</router-link></li>
     </ul>
   </section>
 </nav>
