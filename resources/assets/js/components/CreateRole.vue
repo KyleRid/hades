@@ -6,16 +6,18 @@
   </template>
    <template v-else>
       <tr v-for="role in roles">
-        {{role}}
+        RoleID: {{role.id}}
+        RoleName: {{role.name}}
+        <button v-on:click="del(role.id)">Delete</button>
+        <br>
       </tr>
   </template>
-  <button  @click.prevent="getDataFromApi">Button</button>
-    <form>
-      <div class="form-group">
-        <input type="title" ref="title" class="form-control" id="role-name" placeholder="Enter role" required>
-      </div>
-      <button type="submit" @click.prevent="create" class="btn btn-primary block">Create</button>
-    </form>
+  <form>
+    <div class="form-group">
+      <input type="title" ref="title" class="form-control" id="role-name" placeholder="Enter role" required>
+    </div>
+    <button type="submit" @click.prevent="create" class="btn btn-primary block">Create</button>
+  </form>
   </div>
 </template>
 
@@ -23,8 +25,11 @@
 <script>
 export default {
   data() {
+    console.log('data');
+    this.getDataFromApi();
+
     return {
-      loading: false,
+      loading: true,
       roles: [],
     };
   },
@@ -54,17 +59,17 @@ export default {
       this.$refs.title.value = "";
       this.$refs.body.value = "";
     },
-    created() {
-      this.getDataFromApi();
+    del(roleID) {
+      console.log('roleID', roleID);
+       axios.delete("/api/roles/" + roleID);
     },
     async getDataFromApi() {
-      console.log('getDataFromApi');
       this.loading = true;
       const response = await axios.get('/api/roles/');
       console.log('response', response);
 
       this.loading = false;
-      this.roles = response.data;
+      this.roles = response.data.data;
     }
   }
 };

@@ -67,22 +67,22 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
 
-    public function show(Post $post)
+    public function show(Role $role)
     {
-        return new RoleResource($post);
+        return new RoleResource($role);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Role $role)
     {
         //
     }
@@ -91,32 +91,33 @@ class RoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
 
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Role $role)
     {
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
         ]);
 
-        $post->update($request->only(['title', 'body']));
-        return new RoleResource($post);
+        $role->update($request->only(['title', 'body']));
+        return new RoleResource($role);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(Post $post)
+    public function destroy(Role $role)
     {
-        $post->delete();
-        return response()->json(null, 204);
+        // $role->delete();
+        // return response()->json(null, 204);
+        return ['deleted123' => $role];
     }
 
     public function all()
@@ -126,8 +127,8 @@ class RoleController extends Controller
 
     }
 
-    public function single(Post $post)
+    public function single(Role $role)
     {
-        return view('single', compact('post'));
+        return view('single', compact('role'));
     }
 }

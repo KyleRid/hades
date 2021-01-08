@@ -61773,11 +61773,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
+    console.log('data');
+    this.getDataFromApi();
+
     return {
-      loading: false,
+      loading: true,
       roles: []
     };
   },
@@ -61807,8 +61812,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       this.$refs.title.value = "";
       this.$refs.body.value = "";
     },
-    created: function created() {
-      this.getDataFromApi();
+    del: function del(roleID) {
+      console.log('roleID', roleID);
+      axios.delete("/api/roles/" + roleID);
     },
     getDataFromApi: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
@@ -61817,20 +61823,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log('getDataFromApi');
                 this.loading = true;
-                _context.next = 4;
+                _context.next = 3;
                 return axios.get('/api/roles/');
 
-              case 4:
+              case 3:
                 response = _context.sent;
 
                 console.log('response', response);
 
                 this.loading = false;
-                this.roles = response.data;
+                this.roles = response.data.data;
 
-              case 8:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -62643,21 +62648,29 @@ var render = function() {
       _vm.loading
         ? [_vm._v("\n loading...\n")]
         : _vm._l(_vm.roles, function(role) {
-            return _c("tr", [_vm._v("\n      " + _vm._s(role) + "\n    ")])
+            return _c("tr", [
+              _vm._v(
+                "\n      RoleID: " +
+                  _vm._s(role.id) +
+                  "\n      RoleName: " +
+                  _vm._s(role.name) +
+                  "\n      "
+              ),
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.del(role.id)
+                    }
+                  }
+                },
+                [_vm._v("Delete")]
+              ),
+              _vm._v(" "),
+              _c("br")
+            ])
           }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.getDataFromApi($event)
-            }
-          }
-        },
-        [_vm._v("Button")]
-      ),
       _vm._v(" "),
       _c("form", [
         _c("div", { staticClass: "form-group" }, [
