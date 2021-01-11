@@ -10,6 +10,8 @@ import Update   from './components/Update'
 import Comments from './components/Comments'
 import CreateRole from './components/Createrole'
 import UserControl from './components/UserControl'
+import PostsList from './components/PostsList'
+import EditPost from './components/EditPost'
 
 const router = new VueRouter({
     mode: 'history',
@@ -44,6 +46,19 @@ const router = new VueRouter({
             component: UserControl,
             props: true
         },
+        {
+            path: '/admin/posts/',
+            name: 'postsList',
+            component: PostsList,
+            props: true
+        },
+        {
+            path: '/admin/posts/edit/:postId',
+            name: 'editPost',
+            component: EditPost,
+            props: true
+        },
+
     ],
 });
 

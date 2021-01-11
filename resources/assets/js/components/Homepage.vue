@@ -7,7 +7,8 @@
     <a style="color: white" href="/admin/dashboard">Dashboard</a>
     <hr>
     <ul>
-       <li> <router-link :to="{ name: 'create', params: { userId } }">New Post </router-link></li>
+       <li> <router-link :to="{ name: 'create', params: { userId: userId } }">New Post </router-link></li>
+       <li> <router-link :to="{ name: 'postsList' }">Posts</router-link></li>
        <li> <router-link :to="{ name: 'createRole' }">New Role</router-link></li>
        <li> <router-link :to="{ name: 'userControl' }">User Control</router-link></li>
     </ul>

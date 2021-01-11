@@ -25,6 +25,7 @@
     "pusher-js": "^4.3.0",
     "vue-router": "^3.4.9",
     "vue-sliding-pagination": "^1.1.2",
+    "vue2-editor": "^2.10.2",
     "vuejs-paginate": "^2.1.0"
   }
 }

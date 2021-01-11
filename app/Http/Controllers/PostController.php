@@ -42,7 +42,7 @@ class PostController extends Controller
             'title' => 'required',
             'body' => 'required',
             'user_id' => 'required',
-            'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         $post = new Post();
