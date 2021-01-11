@@ -78000,6 +78000,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -78008,7 +78028,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   props: {
     postId: {
-      type: Number,
+      type: Number | String,
       required: true
     }
   },
@@ -78016,14 +78036,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var _this = this;
 
     axios.get('/api/posts/' + this.postId).then(function (response) {
-      console.log('response123', response);
-      _this.posts = response.data.data;
+      console.log('response single post', response);
+      _this.content = response.data.data.body;
+      _this.$refs.title.value = response.data.data.title;
     });
     return {
       error: false,
       successful: false,
       errors: [],
-      posts: []
+      content: ''
     };
   },
 
@@ -78032,13 +78053,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this2 = this;
 
       this.userId = 3;
-      console.log('create', this, this.content, this.userId);
+      console.log('update', this.content, this.$refs.title.value);
       var formData = new FormData();
       formData.append("title", this.$refs.title.value);
       formData.append("body", this.content);
       formData.append("user_id", this.userId);
       // formData.append("image", this.$refs.image.files[0]);
-      axios.post("/api/posts", formData).then(function (response) {
+      formData.append('test', 123);
+      console.log('formData', formData);
+      axios.put("/api/posts/" + 3, {
+        'title': this.$refs.title.value,
+        'body': this.content,
+        'user_id': this.userId
+      }).then(function (response) {
         _this2.successful = true;
         _this2.error = false;
         _this2.errors = [];
@@ -78064,13 +78091,104 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    _vm._l(_vm.posts, function(post) {
-      return _c("div", [_c("div", [_vm._v("\n    edit post\n    ")])])
-    })
-  )
+  return _c("div", { staticClass: "container" }, [
+    _c("form", [
+      _c(
+        "div",
+        {
+          class: ["form-group m-1 p-3", _vm.successful ? "alert-success" : ""]
+        },
+        [
+          _vm.successful
+            ? _c("span", { staticClass: "label label-sucess" }, [
+                _vm._v(" Published! ")
+              ])
+            : _vm._e()
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { class: ["form-group m-1 p-3", _vm.error ? "alert-danger" : ""] },
+        [
+          _vm.errors.title
+            ? _c("span", { staticClass: "label label-danger" }, [
+                _vm._v(" " + _vm._s(_vm.errors.title[0]) + " ")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.errors.body
+            ? _c("span", { staticClass: "label label-danger" }, [
+                _vm._v(" " + _vm._s(_vm.errors.body[0]) + " ")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.errors.image
+            ? _c("span", { staticClass: "label label-danger" }, [
+                _vm._v(" " + _vm._s(_vm.errors.image[0]) + " ")
+              ])
+            : _vm._e()
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("input", {
+          ref: "title",
+          staticClass: "form-control",
+          attrs: {
+            type: "title",
+            id: "title",
+            placeholder: "Enter title",
+            required: ""
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("vue-editor", {
+            model: {
+              value: _vm.content,
+              callback: function($$v) {
+                _vm.content = $$v
+              },
+              expression: "content"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "custom-file mb-3" }, [
+        _c("input", {
+          ref: "image",
+          staticClass: "custom-file-input",
+          attrs: { type: "file", name: "image", id: "image", required: "" }
+        }),
+        _vm._v(" "),
+        _c("label", { staticClass: "custom-file-label" }, [
+          _vm._v("Choose thumbnail...")
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary block",
+          attrs: { type: "submit" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.save($event)
+            }
+          }
+        },
+        [_vm._v("Submit")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
