@@ -73262,6 +73262,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -73301,7 +73303,7 @@ var render = function() {
         _c("a", { staticStyle: { color: "white" }, attrs: { href: "/" } }, [
           _vm._v("Phoenix")
         ]),
-        _vm._v("   ||   \n    "),
+        _vm._v(" "),
         _c(
           "a",
           {

@@ -1,68 +1,68 @@
 
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="{{ Config::get('app.locale') }}">
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Neo Ighodaro">
+    <meta name="author" content="Vladimir Agapov">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>LaravelCMS</title>
+    <title>Hades</title>
     <link rel="manifest" href="/manifest.json"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <style>
-    body {
-    padding-top: 54px;
-    }
-    @media (min-width: 992px) {
-    body {
-        padding-top: 56px;
-    }
-    }
+        body {
+            padding-top: 54px;
+        }
+        @media (min-width: 992px) {
+            body {
+                padding-top: 56px;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="/">LaravelCMS</a>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-             @if (Route::has('login'))
-                    @auth
-                    <li class="nav-item">
-                         <a class="nav-link" href="{{ url('/home') }}">Dashboard</a>
+        <div class="container">
+            <a class="navbar-brand" href="/">LaravelCMS</a>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    @if (Route::has('login'))
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/home') }}">Dashboard</a>
+                            </li>
+                            @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            </li>
+                        @endauth
+                    @endif
+                    <li>
+                        change colors
                     </li>
-                     @else
-                     <li class="nav-item">
-                         <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    </li>
-                     <li class="nav-item">
-                         <a class="nav-link" href="{{ route('register') }}">Register</a>
-                         </li>
-                     @endauth
-                     <li>
-                            <div>
-                                change colors
-                            </div>
-                        </li>
-             @endif
-          </ul>
+                </ul>
+            </div>
         </div>
-      </div>
     </nav>
 
-  <div id="app">
-     @yield('content')
-  </div>
+    <div id="app">
+        @yield('content')
+    </div>
 
-  <footer class="py-5 bg-dark">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; LaravelCMS 2018</p>
-      </div>
+    <footer class="py-5 bg-dark">
+        <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Hades 2021</p>
+        </div>
     </footer>
-        <script src="{{ asset('js/app.js') }}"></script>
 
-  </body>
+    <script src="{{ asset('js/app.js') }}"></script>
+
+    </body>
 </html>

@@ -1,27 +1,29 @@
 
 <template>
-<div>
-<nav>
-  <section>
-    <a style="color: white" href="/">Phoenix</a> &nbsp; ||  &nbsp;
-    <a style="color: white" href="/admin/dashboard">Dashboard</a>
-    <hr>
-    <ul>
-       <li> <router-link :to="{ name: 'create', params: { userId: userId } }">New Post </router-link></li>
-       <li> <router-link :to="{ name: 'postsList' }">Posts</router-link></li>
-       <li> <router-link :to="{ name: 'createRole' }">New Role</router-link></li>
-       <li> <router-link :to="{ name: 'userControl' }">User Control</router-link></li>
-    </ul>
-  </section>
-</nav>
-<article>
-  <header>
-  <header class="d-inline">Welcome, {{ userName }} </header>
-  <p @click="logout" class="float-right mr-3" style="cursor: pointer"> Logout </p>
-</header>
-   <div> <router-view></router-view> </div>
-</article>
-</div>
+	<div>
+		<nav>
+			<section>
+				<a style="color: white" href="/">Phoenix</a>
+				<a style="color: white" href="/admin/dashboard">Dashboard</a>
+				<hr>
+				<ul>
+					<li> <router-link :to="{ name: 'create', params: { userId: userId } }">New Post </router-link></li>
+					<li> <router-link :to="{ name: 'postsList' }">Posts</router-link></li>
+					<li> <router-link :to="{ name: 'createRole' }">New Role</router-link></li>
+					<li> <router-link :to="{ name: 'userControl' }">User Control</router-link></li>
+				</ul>
+			</section>
+		</nav>
+		<article>
+			<header>
+			<header class="d-inline">Welcome, {{ userName }} </header>
+				<p @click="logout" class="float-right mr-3" style="cursor: pointer"> Logout </p>
+			</header>
+			<div>
+				<router-view></router-view>
+			</div>
+		</article>
+	</div>
 </template>
 
 
