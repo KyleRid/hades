@@ -18,8 +18,8 @@
 <div class="form-group">
   <vue-editor v-model="content"></vue-editor>
   <!-- <textarea class="form-control" ref="body" id="body" placeholder="Enter a body" rows="8" required></textarea>-->
-  renderedContent
-  <div v-html="renderedContent"></div>
+  <!-- renderedContent
+  <div v-html="renderedContent"></div>-->
 </div>
 
 <div class="custom-file mb-3">

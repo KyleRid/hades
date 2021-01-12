@@ -66,4 +66,5 @@ const app = new Vue({
     el: '#app',
     components: { Homepage, Comments },
     router,
+    // delimiters: ['!{', '}!']
 });

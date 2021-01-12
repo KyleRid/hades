@@ -41,6 +41,11 @@
                          <a class="nav-link" href="{{ route('register') }}">Register</a>
                          </li>
                      @endauth
+                     <li>
+                            <div>
+                                change colors
+                            </div>
+                        </li>
              @endif
           </ul>
         </div>
