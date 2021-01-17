@@ -59,7 +59,7 @@ export default {
                     this.options[response[key].option_name] = response[key];
                 }
             }
-            this.options['user_can_register'] = !!parseInt(this.options['user_can_register']);
+            this.options['user_can_register'].option_value = !!parseInt(this.options['user_can_register']);
             this.loading = false;
             console.log('data', this.options);
         },
@@ -70,7 +70,7 @@ export default {
             const formData = new FormData();
 
             axios
-                .put("/api/options/", JSON.stringify(this.options))
+                .put("/api/options", this.options)
                 .then(response => {
                 console.log('then',response);
                 this.successful = true;

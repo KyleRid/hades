@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Options;
+use Illuminate\Support\Facades\DB;
 
 // add delete update get
 class OptionsController extends Controller
@@ -60,12 +61,22 @@ class OptionsController extends Controller
         // $option->update($request->all());
         // return response()->json($option, 200);
         // back()->with('message', 'Record Successfully Updated!');
+        $option->update($request->all());
+
+        return response()->json($option, 200);
     }
 
-    public function updateMultiple(Request $request, Options $option) {
-        return [
-            $request
-        ];
+    public function updateMultiple(Options $option) {
+        //VALIDATE
+        $ids = $option;
+        // var_dump(json_encode(123));
+        // return $request;
+    //     DB::table('options')->whereIn('option_id', [1, 2])->update([
+    //         'option_value' => 'newSiteUrl'
+    //     ],
+    // [
+    //     'option_value' => 'newHOme'
+    // ]);
     }
 
     /**
