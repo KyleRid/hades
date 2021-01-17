@@ -21,3 +21,4 @@ Route::apiResource('roles', 'RoleController');
 Route::apiResource('posts', 'PostController');
 Route::apiResource('users', 'UserController');
 Route::apiResource('options', 'OptionsController');
+Route::put('options/', 'OptionsController@updateMultiple');

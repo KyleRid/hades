@@ -26910,6 +26910,9 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         component: __WEBPACK_IMPORTED_MODULE_10__components_EditPost___default.a,
         props: true
     }, {
+        path: '/admin/configuration/',
+        redirect: '/admin/configuration/general'
+    }, {
         path: '/admin/configuration/general',
         name: 'configuration',
         component: __WEBPACK_IMPORTED_MODULE_11__components_Configuration___default.a,
@@ -78220,10 +78223,6 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(96)
-}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(98)
@@ -78232,7 +78231,7 @@ var __vue_template__ = __webpack_require__(99)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -78267,51 +78266,46 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 96 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(97);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(4)("45288327", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-67397d62\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Configuration.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-67397d62\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Configuration.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 97 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(3)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 96 */,
+/* 97 */,
 /* 98 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -78327,13 +78321,76 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {},
     data: function data() {
-        var _this = this;
+        this.getDataFromApi();
+        return {
+            options: {},
+            loading: true
+        };
+    },
 
-        axios.get('/api/posts/').then(function (response) {
-            console.log('response123', response);
-            _this.posts = response.data.data;
-        });
-        return {};
+    methods: {
+        getDataFromApi: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var response, key;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                this.loading = true;
+                                _context.next = 3;
+                                return axios.get('/api/options/');
+
+                            case 3:
+                                response = _context.sent;
+
+                                response = response.data;
+                                console.log('response', response);
+                                for (key in response) {
+                                    if (response.hasOwnProperty(key)) {
+                                        this.options[response[key].option_name] = response[key];
+                                    }
+                                }
+                                this.options['user_can_register'] = !!parseInt(this.options['user_can_register']);
+                                this.loading = false;
+                                console.log('data', this.options);
+
+                            case 10:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function getDataFromApi() {
+                return _ref.apply(this, arguments);
+            }
+
+            return getDataFromApi;
+        }(),
+        save: function save() {
+            var _this = this;
+
+            console.log(this.options);
+
+            var formData = new FormData();
+
+            axios.put("/api/options/", JSON.stringify(this.options)).then(function (response) {
+                console.log('then', response);
+                _this.successful = true;
+                _this.error = false;
+                _this.errors = [];
+            }).catch(function (error) {
+                console.log('error', error);
+                if (!_.isEmpty(error.response)) {
+                    if (error.response.status = 422) {
+                        _this.errors = error.response.data.errors;
+                        _this.successful = false;
+                        _this.error = true;
+                    }
+                }
+            });
+        }
     }
 });
 
@@ -78345,7 +78402,231 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" })
+  return _c("div", { staticClass: "container" }, [
+    !_vm.loading
+      ? _c("form", [
+          _c("div", [
+            _c("label", { attrs: { for: "siteurl" } }, [_vm._v("Site URL: ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.options.siteurl.option_value,
+                  expression: "options.siteurl.option_value"
+                }
+              ],
+              attrs: { id: "siteurl" },
+              domProps: { value: _vm.options.siteurl.option_value },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.options.siteurl,
+                    "option_value",
+                    $event.target.value
+                  )
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("label", { attrs: { for: "home" } }, [_vm._v("Home: ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.options.home.option_value,
+                  expression: "options.home.option_value"
+                }
+              ],
+              attrs: { id: "home" },
+              domProps: { value: _vm.options.home.option_value },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.options.home,
+                    "option_value",
+                    $event.target.value
+                  )
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("label", { attrs: { for: "sitename" } }, [_vm._v("Sitename: ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.options.sitename.option_value,
+                  expression: "options.sitename.option_value"
+                }
+              ],
+              attrs: { id: "sitename" },
+              domProps: { value: _vm.options.sitename.option_value },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.options.sitename,
+                    "option_value",
+                    $event.target.value
+                  )
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("label", { attrs: { for: "sitedescription" } }, [
+              _vm._v("Site Descriotion: ")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.options.sitedescription.option_value,
+                  expression: "options.sitedescription.option_value"
+                }
+              ],
+              attrs: { id: "sitedescription" },
+              domProps: { value: _vm.options.sitedescription.option_value },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.options.sitedescription,
+                    "option_value",
+                    $event.target.value
+                  )
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("label", { attrs: { for: "user_can_register" } }, [
+              _vm._v("User Can Register: ")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.options.user_can_register.option_value,
+                  expression: "options.user_can_register.option_value"
+                }
+              ],
+              attrs: { id: "user_can_register", type: "checkbox" },
+              domProps: {
+                checked: Array.isArray(
+                  _vm.options.user_can_register.option_value
+                )
+                  ? _vm._i(_vm.options.user_can_register.option_value, null) >
+                    -1
+                  : _vm.options.user_can_register.option_value
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.options.user_can_register.option_value,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(
+                          _vm.options.user_can_register,
+                          "option_value",
+                          $$a.concat([$$v])
+                        )
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.options.user_can_register,
+                          "option_value",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.options.user_can_register, "option_value", $$c)
+                  }
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("label", { attrs: { for: "admin_email" } }, [
+              _vm._v("Admin Email: ")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.options.admin_email.option_value,
+                  expression: "options.admin_email.option_value"
+                }
+              ],
+              attrs: { id: "admin_email" },
+              domProps: { value: _vm.options.admin_email.option_value },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.options.admin_email,
+                    "option_value",
+                    $event.target.value
+                  )
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.save($event)
+                }
+              }
+            },
+            [_vm._v("Save")]
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.loading
+      ? _c("div", [_vm._v("\n            Loading...\n        ")])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

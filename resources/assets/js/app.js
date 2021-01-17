@@ -60,6 +60,10 @@ const router = new VueRouter({
             props: true
         },
         {
+            path: '/admin/configuration/',
+            redirect: '/admin/configuration/general',
+        },
+        {
             path: '/admin/configuration/general',
             name: 'configuration',
             component: Configuration,

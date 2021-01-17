@@ -50,8 +50,22 @@ class OptionsController extends Controller
      */
     public function update(Request $request, Options $option)
     {
-        $option->update($request->all());
-        return response()->json($option, 200);
+        // VALIDATE
+        return var_dump($option);
+        // \DB::table('options')->whereIn('id', $option)->update(['code' => 'AD']);
+        // $update = [['column' => 'value'],['column' => 'value']];
+        // DB::table('my_table')->whereIn('page_id', [1, 2, 3])->update($update);
+        // $input = $request->all();
+        // $option->fill($input)->save();
+        // $option->update($request->all());
+        // return response()->json($option, 200);
+        // back()->with('message', 'Record Successfully Updated!');
+    }
+
+    public function updateMultiple(Request $request, Options $option) {
+        return [
+            $request
+        ];
     }
 
     /**
