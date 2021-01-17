@@ -11,6 +11,7 @@
 					<li> <router-link :to="{ name: 'postsList' }">Posts</router-link></li>
 					<li> <router-link :to="{ name: 'createRole' }">New Role</router-link></li>
 					<li> <router-link :to="{ name: 'userControl' }">User Control</router-link></li>
+					<li> <router-link :to="{ name: 'configuration' }">Configuration</router-link></li>
 				</ul>
 			</section>
 		</nav>

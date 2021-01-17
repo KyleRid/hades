@@ -12,6 +12,7 @@ import CreateRole from './components/Createrole'
 import UserControl from './components/UserControl'
 import PostsList from './components/PostsList'
 import EditPost from './components/EditPost'
+import Configuration from './components/Configuration'
 
 const router = new VueRouter({
     mode: 'history',
@@ -58,7 +59,12 @@ const router = new VueRouter({
             component: EditPost,
             props: true
         },
-
+        {
+            path: '/admin/configuration/general',
+            name: 'configuration',
+            component: Configuration,
+            props: true
+        },
     ],
 });
 
