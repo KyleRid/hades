@@ -13,6 +13,7 @@ import UserControl from './components/UserControl'
 import PostsList from './components/PostsList'
 import EditPost from './components/EditPost'
 import Configuration from './components/Configuration'
+import Dashboard from './components/Dashboard'
 
 const router = new VueRouter({
     mode: 'history',
@@ -20,7 +21,7 @@ const router = new VueRouter({
         {
             path: '/dashboard',
             name: 'dashboard',
-            component: Read,
+            component: Dashboard,
             props: true
         },
         {
