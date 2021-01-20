@@ -19,7 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/admin/{any}', 'AdminController@index')->where('any', '.*');
+// Route::get('/admin/{any}', 'AdminController@index')->where('any', '.*');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/emailCampaign', 'EmailCampaignController@index')->name('emailCompaign');
+Route::get('/payments', 'PaymentsController@index')->name('payments');
 
 
 Route::get('/{post}/comments', 'CommentController@index');

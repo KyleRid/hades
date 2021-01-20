@@ -18,53 +18,65 @@ const router = new VueRouter({
     mode: 'history',
     routes: [
         {
-            path: '/admin/dashboard',
-            name: 'read',
+            path: '/dashboard',
+            name: 'dashboard',
             component: Read,
             props: true
         },
         {
-            path: '/admin/create',
+            path: '/dashboard/emailCampaign',
+            name: 'emailCampaign',
+            component: Read,
+            props: true
+        },
+        {
+            path: '/dashboard/payments',
+            name: 'payments',
+            component: Read,
+            props: true
+        },
+        {
+            path: '/create',
             name: 'create',
             component: Create,
             props: true
         },
         {
-            path: '/admin/update',
+            path: '/update',
             name: 'update',
             component: Update,
             props: true
         },
         {
-            path: '/admin/create/role',
+            path: '/create/role',
             name: 'createRole',
             component: CreateRole,
             props: true
         },
         {
-            path: '/admin/users/',
+            path: '/users/',
             name: 'userControl',
             component: UserControl,
             props: true
         },
         {
-            path: '/admin/posts/',
+            path: '/posts/',
             name: 'postsList',
             component: PostsList,
             props: true
         },
         {
-            path: '/admin/posts/edit/:postId',
+            path: '/posts/edit/:postId',
             name: 'editPost',
             component: EditPost,
             props: true
         },
         {
-            path: '/admin/configuration/',
-            redirect: '/admin/configuration/general',
+            path: '/configuration/',
+            redirect: '/configuration/general',
         },
         {
-            path: '/admin/configuration/general',
+            path: '/configuration/general',
             name: 'configuration',
             component: Configuration,
             props: true

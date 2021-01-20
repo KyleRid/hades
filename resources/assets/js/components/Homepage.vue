@@ -4,9 +4,13 @@
 		<nav>
 			<section>
 				<a style="color: white" href="/">Phoenix</a>
-				<a style="color: white" href="/admin/dashboard">Dashboard</a>
+				<a style="color: white" href="/dashboard">Dashboard</a>
 				<hr>
 				<ul>
+					<li> <router-link :to="{ name: 'dashboard'}">Dashboard</router-link></li>
+					<li> <router-link :to="{ name: 'emailCampaign'}">Email Campaign</router-link></li>
+					<li> <router-link :to="{ name: 'payments'}">Payments</router-link></li>
+
 					<li> <router-link :to="{ name: 'create', params: { userId: userId } }">New Post </router-link></li>
 					<li> <router-link :to="{ name: 'postsList' }">Posts</router-link></li>
 					<li> <router-link :to="{ name: 'createRole' }">New Role</router-link></li>

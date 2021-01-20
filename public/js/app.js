@@ -26875,45 +26875,55 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
     routes: [{
-        path: '/admin/dashboard',
-        name: 'read',
+        path: '/dashboard',
+        name: 'dashboard',
         component: __WEBPACK_IMPORTED_MODULE_4__components_Read___default.a,
         props: true
     }, {
-        path: '/admin/create',
+        path: '/dashboard/emailCampaign',
+        name: 'emailCampaign',
+        component: __WEBPACK_IMPORTED_MODULE_4__components_Read___default.a,
+        props: true
+    }, {
+        path: '/dashboard/payments',
+        name: 'payments',
+        component: __WEBPACK_IMPORTED_MODULE_4__components_Read___default.a,
+        props: true
+    }, {
+        path: '/create',
         name: 'create',
         component: __WEBPACK_IMPORTED_MODULE_3__components_Create___default.a,
         props: true
     }, {
-        path: '/admin/update',
+        path: '/update',
         name: 'update',
         component: __WEBPACK_IMPORTED_MODULE_5__components_Update___default.a,
         props: true
     }, {
-        path: '/admin/create/role',
+        path: '/create/role',
         name: 'createRole',
         component: __WEBPACK_IMPORTED_MODULE_7__components_Createrole___default.a,
         props: true
     }, {
-        path: '/admin/users/',
+        path: '/users/',
         name: 'userControl',
         component: __WEBPACK_IMPORTED_MODULE_8__components_UserControl___default.a,
         props: true
     }, {
-        path: '/admin/posts/',
+        path: '/posts/',
         name: 'postsList',
         component: __WEBPACK_IMPORTED_MODULE_9__components_PostsList___default.a,
         props: true
     }, {
-        path: '/admin/posts/edit/:postId',
+        path: '/posts/edit/:postId',
         name: 'editPost',
         component: __WEBPACK_IMPORTED_MODULE_10__components_EditPost___default.a,
         props: true
     }, {
-        path: '/admin/configuration/',
-        redirect: '/admin/configuration/general'
+        path: '/configuration/',
+        redirect: '/configuration/general'
     }, {
-        path: '/admin/configuration/general',
+        path: '/configuration/general',
         name: 'configuration',
         component: __WEBPACK_IMPORTED_MODULE_11__components_Configuration___default.a,
         props: true
@@ -73276,6 +73286,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -73318,16 +73332,43 @@ var render = function() {
         _vm._v(" "),
         _c(
           "a",
-          {
-            staticStyle: { color: "white" },
-            attrs: { href: "/admin/dashboard" }
-          },
+          { staticStyle: { color: "white" }, attrs: { href: "/dashboard" } },
           [_vm._v("Dashboard")]
         ),
         _vm._v(" "),
         _c("hr"),
         _vm._v(" "),
         _c("ul", [
+          _c(
+            "li",
+            [
+              _c("router-link", { attrs: { to: { name: "dashboard" } } }, [
+                _vm._v("Dashboard")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            [
+              _c("router-link", { attrs: { to: { name: "emailCampaign" } } }, [
+                _vm._v("Email Campaign")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            [
+              _c("router-link", { attrs: { to: { name: "payments" } } }, [
+                _vm._v("Payments")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
           _c(
             "li",
             [
